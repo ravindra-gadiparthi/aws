@@ -1,0 +1,49 @@
+#!/bin/bash
+
+yum update -y
+
+#enable node js yum repository
+sudo yum install -y gcc-c++ make
+curl -sL https://rpm.nodesource.com/setup_12.x | sudo -E bash -
+
+#install node
+sudo yum install -y nodejs
+
+
+#create new folder
+mkdir nodeapp
+cd nodeapp
+
+
+#install dependencies
+npm install axios
+
+
+#copy source code into inxed.js
+sudo cat >> index.js << EOF
+var http = require('http');
+const axios = require('axios');
+
+//create a server object:
+http.createServer(function (req, res) {
+  axios.get('http://169.254.169.254/latest/dynamic/instance-identity/document')
+  .then(function (response) {
+    console.log(JSON.stringify(response.data));
+	res.write(JSON.stringify(response.data)); 
+  })
+  .catch(function (error) {
+    console.log(error);
+	res.write(error); 
+  })
+  .finally(function () {
+     res.end(); 
+  });
+  
+}).listen(8080,()=>{
+console.log("App has started");
+
+});
+EOF
+
+#run node server
+node index.js
