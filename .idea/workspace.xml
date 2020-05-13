@@ -23,7 +23,15 @@
     <option name="FILTER_BY_CURRENT_PROJECT" value="true" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="c9f9c052-b675-4189-84b3-72c5f0df15bf" name="Default Changelist" comment="" />
+    <list default="true" id="c9f9c052-b675-4189-84b3-72c5f0df15bf" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/cloudcafe-aws-s3-service/src/main/java/org/cloudcafe/aws/s3/model/Image.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cloudcafe-aws-s3-service/src/main/java/org/cloudcafe/aws/s3/resources/ImageController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cloudcafe-aws-s3-service/src/main/java/org/cloudcafe/aws/s3/services/ImageService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cloudcafe-aws-s3-service/src/main/resources/static/style.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cloudcafe-aws-s3-service/src/main/resources/templates/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -39,6 +47,10 @@
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
+    <property name="RequestMappingsPanelOrder0" value="0" />
+    <property name="RequestMappingsPanelOrder1" value="1" />
+    <property name="RequestMappingsPanelWidth0" value="75" />
+    <property name="RequestMappingsPanelWidth1" value="75" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
@@ -48,6 +60,9 @@
     <property name="project.structure.proportion" value="0.0" />
     <property name="project.structure.side.proportion" value="0.0" />
     <property name="settings.editor.selected.configurable" value="Errors" />
+  </component>
+  <component name="ReactorSettings">
+    <option name="notificationShown" value="true" />
   </component>
   <component name="RunManager">
     <configuration default="true" type="Applet">
@@ -65,6 +80,21 @@
     <configuration default="true" type="JUnit" factoryName="JUnit">
       <option name="TEST_OBJECT" value="class" />
       <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="CloudCafeAwsS3ServiceApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" temporary="true" nameIsGenerated="true">
+      <module name="cloudcafe-aws-s3-service" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="org.cloudcafe.aws.s3.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="SPRING_BOOT_MAIN_CLASS" value="org.cloudcafe.aws.s3.CloudCafeAwsS3ServiceApplication" />
+      <option name="ACTIVE_PROFILES" value="dev" />
+      <option name="ALTERNATIVE_JRE_PATH" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -87,6 +117,11 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Spring Boot.CloudCafeAwsS3ServiceApplication" />
+      </list>
+    </recent_temporary>
   </component>
   <component name="SvnConfiguration">
     <configuration />
@@ -110,5 +145,53 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="552" y="178" key="#Project_Structure/0.0.1920.1040@0.0.1920.1040" timestamp="1589200059932" />
+    <state x="414" y="175" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1589329440470">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="414" y="175" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1589329440470" />
+    <state width="1877" height="355" key="GridCell.Tab.0.bottom" timestamp="1589329575998">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1877" height="355" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1589329575998" />
+    <state width="1877" height="355" key="GridCell.Tab.0.center" timestamp="1589329575998">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1877" height="355" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1589329575998" />
+    <state width="1877" height="355" key="GridCell.Tab.0.left" timestamp="1589329575997">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1877" height="355" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1589329575997" />
+    <state width="1877" height="355" key="GridCell.Tab.0.right" timestamp="1589329575998">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1877" height="355" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1589329575998" />
+    <state width="1877" height="355" key="GridCell.Tab.1.bottom" timestamp="1589329575998">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1877" height="355" key="GridCell.Tab.1.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1589329575998" />
+    <state width="1877" height="355" key="GridCell.Tab.1.center" timestamp="1589329575998">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1877" height="355" key="GridCell.Tab.1.center/0.0.1920.1040@0.0.1920.1040" timestamp="1589329575998" />
+    <state width="1877" height="355" key="GridCell.Tab.1.left" timestamp="1589329575998">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1877" height="355" key="GridCell.Tab.1.left/0.0.1920.1040@0.0.1920.1040" timestamp="1589329575998" />
+    <state width="1877" height="355" key="GridCell.Tab.1.right" timestamp="1589329575998">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1877" height="355" key="GridCell.Tab.1.right/0.0.1920.1040@0.0.1920.1040" timestamp="1589329575998" />
+    <state x="681" y="261" width="570" height="524" key="StructurePopup" timestamp="1589292825766">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="681" y="261" width="570" height="524" key="StructurePopup/0.0.1920.1040@0.0.1920.1040" timestamp="1589292825766" />
+    <state width="498" height="497" key="SwitcherDM" timestamp="1589293154960">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="498" height="497" key="SwitcherDM/0.0.1920.1040@0.0.1920.1040" timestamp="1589293154960" />
+    <state x="623" y="225" width="672" height="678" key="search.everywhere.popup" timestamp="1589289834471">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="623" y="225" width="672" height="678" key="search.everywhere.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1589289834471" />
   </component>
 </project>
