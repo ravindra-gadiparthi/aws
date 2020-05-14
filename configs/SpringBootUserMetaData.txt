@@ -1,0 +1,34 @@
+#!/bin/bash
+
+sudo su
+
+yum update -y
+
+
+sudo yum install java-1.8.0-openjdk-headless.x86_64 -y
+
+sudo yum install java-1.8.0-openjdk-devel.x86_64 -y 
+
+sudo /usr/sbin/alternatives --set java /usr/lib/jvm/jre-1.8.0-openjdk.x86_64/bin/java
+
+sudo /usr/sbin/alternatives --set  javac /usr/lib/jvm/java-1.8.0-openjdk.x86_64/bin/javac
+
+
+sudo wget https://repos.fedorapeople.org/repos/dchen/apache-maven/epel-apache-maven.repo -O /etc/yum.repos.d/epel-apache-maven.repo
+
+sudo sed -i s/\$releasever/6/g /etc/yum.repos.d/epel-apache-maven.repo
+
+sudo yum install -y apache-maven -y
+
+
+aws s3 cp s3://ravindracodedeploy/cloudcafe-aws-service-chapter3.zip  /opt/cloudcafe-aws-service-chapter3.zip
+
+cd /opt
+
+sudo unzip /opt/cloudcafe-aws-service-chapter3.zip
+
+cd cloudcafe-aws-service-chapter3
+
+sudo mvn clean install
+
+sudo mvn spring-boot:run
