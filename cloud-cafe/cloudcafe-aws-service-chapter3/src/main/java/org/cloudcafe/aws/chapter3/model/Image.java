@@ -1,18 +1,30 @@
-package org.cloudcafe.aws.rekognition.model;
+package org.cloudcafe.aws.chapter3.model;
 
-import com.amazonaws.services.rekognition.model.Label;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.List;
+import javax.persistence.*;
 
 @Data
-@NoArgsConstructor
+@Builder
+@Entity
+@Table
 @AllArgsConstructor
+@NoArgsConstructor
 public class Image {
 
-    private String id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Integer id;
+
+    @Column
     private String name;
-    private List<Label> labels;
+
+    @Column
+    private String bucketName;
+
+    @Column
+    private String labels;
 }

@@ -21,6 +21,14 @@ bucketName: ${BUCKET_NAME}
 
 
 
+spring:
+  datasource:
+    url: ${DB_URL}
+    username: ${DB_USERNAME}
+    password: ${DB_PASSWORD}
+  jpa:
+    hibernate:
+      ddl-auto: update
 
 ---
 

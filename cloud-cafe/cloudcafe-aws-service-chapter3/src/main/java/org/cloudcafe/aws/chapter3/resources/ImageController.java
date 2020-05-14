@@ -1,9 +1,9 @@
-package org.cloudcafe.aws.rekognition.resources;
+package org.cloudcafe.aws.chapter3.resources;
 
 
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.cloudcafe.aws.rekognition.services.ImageService;
+import org.cloudcafe.aws.chapter3.services.ImageService;
 import org.springframework.core.io.InputStreamResource;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;

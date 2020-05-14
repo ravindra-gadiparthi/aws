@@ -1,16 +1,15 @@
-package org.cloudcafe.aws.rekognition.services;
+package org.cloudcafe.aws.chapter3.services;
 
 import com.amazonaws.services.rekognition.AmazonRekognition;
 import com.amazonaws.services.rekognition.AmazonRekognitionClientBuilder;
 import com.amazonaws.services.rekognition.model.DetectLabelsRequest;
 import com.amazonaws.services.rekognition.model.DetectLabelsResult;
-import com.amazonaws.services.rekognition.model.Label;
-import com.amazonaws.services.rekognition.model.S3Object;
 import com.amazonaws.services.s3.AmazonS3Client;
 import com.amazonaws.services.s3.model.S3ObjectInputStream;
-import com.amazonaws.services.s3.model.S3ObjectSummary;
+import com.amazonaws.util.IOUtils;
 import lombok.extern.slf4j.Slf4j;
-import org.cloudcafe.aws.rekognition.model.Image;
+import org.cloudcafe.aws.chapter3.model.Image;
+import org.cloudcafe.aws.chapter3.repository.ImageRepository;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
@@ -21,10 +20,11 @@ import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.InputStream;
+import java.nio.ByteBuffer;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.util.ArrayList;
-import java.util.List;
 
 @Service
 @Slf4j
@@ -34,41 +34,41 @@ public class ImageService {
 
     private AmazonS3Client amazonS3Client;
 
+    private ImageRepository imageRepository;
+
     AmazonRekognition rekognitionClient = AmazonRekognitionClientBuilder.defaultClient();
 
 
     @Value("${bucketName}")
     private String bucketName;
 
-    public ImageService(AmazonS3Client amazonS3Client) {
+    public ImageService(AmazonS3Client amazonS3Client, ImageRepository imageRepository) {
         this.amazonS3Client = amazonS3Client;
+        this.imageRepository = imageRepository;
     }
 
 
     public Flux<Image> findAllImages() {
-        try {
-            return Flux.fromIterable(
-                    amazonS3Client
-                            .listObjects(bucketName)
-                            .getObjectSummaries()
-            ).map(objectSummary ->
-                    new Image(objectSummary.getBucketName(),
-                            objectSummary.getKey(),
-                            getImageLabels(objectSummary)));
-        } catch (Exception e) {
-            e.printStackTrace();
-            return Flux.empty();
-        }
+        return Flux.fromIterable(imageRepository.findAll());
     }
 
-    private List<Label> getImageLabels(S3ObjectSummary objectSummary) {
-        DetectLabelsRequest labelsRequest = new DetectLabelsRequest();
-        com.amazonaws.services.rekognition.model.Image image = new com.amazonaws.services.rekognition.model.Image();
-        image.setS3Object(new S3Object().withBucket(objectSummary.getBucketName()).withName(objectSummary.getKey()));
-        labelsRequest.setImage(image);
-        DetectLabelsResult detectLabels = rekognitionClient.detectLabels(labelsRequest);
+    private Mono<String> getImageLabels(File photo) {
 
-        return detectLabels.getLabels().subList(0,3);
+        return Mono.fromCallable(() -> {
+            ByteBuffer imageBytes;
+            try (InputStream inputStream = new FileInputStream(photo)) {
+                imageBytes = ByteBuffer.wrap(IOUtils.toByteArray(inputStream));
+            }
+
+            DetectLabelsRequest labelsRequest = new DetectLabelsRequest();
+            com.amazonaws.services.rekognition.model.Image image = new com.amazonaws.services.rekognition.model.Image();
+            image.withBytes(imageBytes);
+            labelsRequest.setImage(image);
+            DetectLabelsResult detectLabels = rekognitionClient.detectLabels(labelsRequest);
+            return detectLabels.getLabels().subList(0,5).toString();
+
+        });
+
     }
 
     public Mono<S3ObjectInputStream> findOneImage(String imageName) {
@@ -80,10 +80,16 @@ public class ImageService {
         return files.flatMap(filePart ->
                 filePart.transferTo(Paths.get(UPLOAD_ROOT, filePart.filename()))
                         .then(Mono.fromCallable(() -> {
-                            log.info("uploading to s3 started");
-                            File file = Paths.get(UPLOAD_ROOT, filePart.filename()).toFile();
-                            return amazonS3Client.putObject(bucketName, filePart.filename(), file);
+                            return Paths.get(UPLOAD_ROOT, filePart.filename()).toFile();
                         }))
+                        .flatMap(file -> Mono.zip(
+                                Mono.fromCallable(() -> amazonS3Client.putObject(bucketName, file.getName(), file)),
+                                getImageLabels(file),
+                                (putObjectResult, labels) -> {
+                                    return imageRepository.save(Image.builder().labels(labels)
+                                            .bucketName(bucketName)
+                                            .name(file.getName()).build());
+                                }))
                         .log("uploading to folder completed"))
                 .log("creating image")
                 .then();
