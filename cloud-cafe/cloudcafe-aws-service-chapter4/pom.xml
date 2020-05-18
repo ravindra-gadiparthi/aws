@@ -9,9 +9,9 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>org.cloudcafe.aws</groupId>
-    <artifactId>cloudcafe-aws-rekognition-service</artifactId>
+    <artifactId>cloudcafe-aws-service-chapter4</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>cloudcafe-aws-s3-service</name>
+    <name>cloudcafe-aws-service-chapter4</name>
     <description>Spring Boot</description>
 
     <properties>
@@ -39,6 +39,10 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-actuator</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-oauth2-client</artifactId>
         </dependency>
         <dependency>
             <groupId>mysql</groupId>
