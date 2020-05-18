@@ -21,11 +21,11 @@ sudo sed -i s/\$releasever/6/g /etc/yum.repos.d/epel-apache-maven.repo
 sudo yum install -y apache-maven -y
 
 
-aws s3 cp s3://ravindracodedeploy/cloudcafe-aws-service-chapter3.zip  /opt/cloudcafe-aws-service-chapter3.zip
+sudo aws s3 cp s3://ravindracodedeploy/cloudcafe-aws-service-chapter4.zip  /opt/cloudcafe-aws-service-chapter4.zip
 
 cd /opt
 
-sudo unzip /opt/cloudcafe-aws-service-chapter3.zip
+sudo unzip /opt/cloudcafe-aws-service-chapter4.zip
 
 cd cloudcafe-aws-service-chapter3
 
