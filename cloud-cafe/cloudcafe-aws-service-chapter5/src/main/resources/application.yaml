@@ -1,0 +1,81 @@
+cloud:
+  aws:
+    credentials:
+      instance-profile: true
+      use-default-aws-credentials-chain: true
+    region:
+      auto: true
+    stack:
+      auto: false
+management:
+  metrics:
+    export:
+      cloudwatch:
+        enabled: true
+
+app.url: http://localhost:8080
+cognito.rooturl: https://cloudcafe.auth.ap-south-1.amazoncognito.com
+server.forward-headers-strategy: framework
+
+spring:
+  datasource:
+    url: ${DB_URL}
+    username: ${DB_USERNAME}
+    password: ${DB_PASSWORD}
+  jpa:
+    hibernate:
+      ddl-auto: create-drop
+  security:
+    oauth2:
+      client:
+        registration:
+          cognito:
+            provider: cognito
+            client-id: ${CLIENT_ID}
+            client-secret: ${CLIENT_SECRET}
+            client-name: authorization_code
+            scope: email,openid
+            redirectUri: ${app.url}/login/oauth2/code/cognito
+            authorization-grant-type: authorization_code
+        provider:
+          cognito:
+            authorizationUri: ${cognito.rooturl}/oauth2/authorize
+            tokenUri: ${cognito.rooturl}/oauth2/token
+            jwkSetUri: https://cognito-idp.ap-south-1.amazonaws.com/ap-south-1_${USER_POOL_ID}/.well-known/jwks.json
+            user-info-uri: ${cognito.rooturl}/oauth2/userInfo
+            userNameAttribute: username
+
+logoutUrl:  "https://${cognito.rooturl}/logout?client_id=${spring.security.oauth2.client.registration.cognito.client-id}&redirect_uri=https://localhost:8080/redirect_uri&state=STATE&scope=openid+profile+aws.cognito.signin.user.admin"
+
+
+
+
+bucketName: cloudcafe-app
+
+
+
+---
+
+spring:
+  profiles: dev
+
+cloud:
+  aws:
+    credentials:
+      access-key: ${ACCESS_KEY}
+      secret-key: ${ACCESS_SECRET_KEY}
+      instance-profile: false
+    region:
+      static: ap-south-1
+    stack:
+      auto: false
+management:
+  metrics:
+    export:
+      cloudwatch:
+        enabled: false
+
+aws:
+  apiKey: ${cloud.aws.credentials.access-key}
+  secretKey: ${cloud.aws.credentials.secret-key}
+
