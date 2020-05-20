@@ -27,7 +27,7 @@ cd /opt
 
 sudo unzip /opt/cloudcafe-aws-service-chapter4.zip
 
-cd cloudcafe-aws-service-chapter3
+cd cloudcafe-aws-service-chapter4
 
 sudo mvn clean install
 
