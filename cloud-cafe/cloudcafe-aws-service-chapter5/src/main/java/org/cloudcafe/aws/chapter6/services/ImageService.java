@@ -1,4 +1,4 @@
-package org.cloudcafe.aws.chapter5.services;
+package org.cloudcafe.aws.chapter6.services;
 
 import com.amazonaws.services.rekognition.AmazonRekognition;
 import com.amazonaws.services.rekognition.AmazonRekognitionClientBuilder;
@@ -8,8 +8,8 @@ import com.amazonaws.services.s3.AmazonS3Client;
 import com.amazonaws.services.s3.model.S3ObjectInputStream;
 import com.amazonaws.util.IOUtils;
 import lombok.extern.slf4j.Slf4j;
-import org.cloudcafe.aws.chapter5.model.Image;
-import org.cloudcafe.aws.chapter5.repository.ImageRepository;
+import org.cloudcafe.aws.chapter6.model.Image;
+import org.cloudcafe.aws.chapter6.repository.ImageRepository;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;

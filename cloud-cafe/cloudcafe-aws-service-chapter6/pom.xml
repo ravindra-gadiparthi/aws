@@ -8,11 +8,11 @@
         <version>2.3.0.RELEASE</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
-    <groupId>org.cloudcafe.aws.chapter5</groupId>
-    <artifactId>cloudcafe-aws-service-chapter5</artifactId>
+    <groupId>org.cloudcafe.aws.chapter6</groupId>
+    <artifactId>cloudcafe-aws-service-chapter6</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>cloudcafe-aws-service-chapter5</name>
-    <description>Spring Cloud with S3,RDS, Recognition and Cognito</description>
+    <name>cloudcafe-aws-service-chapter6</name>
+    <description>Spring Cloud with S3,RDS, Recognition,XRAY and Cognito</description>
 
     <properties>
         <java.version>1.8</java.version>
@@ -39,6 +39,31 @@
         <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-aws</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.amazonaws</groupId>
+            <artifactId>aws-xray-recorder-sdk-spring</artifactId>
+            <version>2.5.0</version>
+        </dependency>
+        <dependency>
+            <groupId>com.amazonaws</groupId>
+            <artifactId>aws-xray-recorder-sdk-core</artifactId>
+            <version>2.5.0</version>
+        </dependency>
+        <dependency>
+            <groupId>com.amazonaws</groupId>
+            <artifactId>aws-xray-recorder-sdk-aws-sdk</artifactId>
+            <version>2.5.0</version>
+        </dependency>
+        <dependency>
+            <groupId>com.amazonaws</groupId>
+            <artifactId>aws-xray-recorder-sdk-aws-sdk-instrumentor</artifactId>
+            <version>2.5.0</version>
+        </dependency>
+        <dependency>
+            <groupId>com.amazonaws</groupId>
+            <artifactId>aws-xray-recorder-sdk-sql-mysql</artifactId>
+            <version>2.5.0</version>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>

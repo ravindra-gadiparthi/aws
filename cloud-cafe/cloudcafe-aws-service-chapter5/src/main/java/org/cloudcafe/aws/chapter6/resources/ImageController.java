@@ -1,15 +1,14 @@
-package org.cloudcafe.aws.chapter5.resources;
+package org.cloudcafe.aws.chapter6.resources;
 
 
 import com.amazonaws.services.s3.model.S3ObjectInputStream;
 import lombok.extern.slf4j.Slf4j;
-import org.cloudcafe.aws.chapter5.services.ImageService;
+import org.cloudcafe.aws.chapter6.services.ImageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.InputStreamResource;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PostAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;

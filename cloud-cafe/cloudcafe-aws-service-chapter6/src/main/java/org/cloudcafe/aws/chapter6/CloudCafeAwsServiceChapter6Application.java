@@ -1,4 +1,4 @@
-package org.cloudcafe.aws.chapter5;
+package org.cloudcafe.aws.chapter6;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -9,10 +9,10 @@ import org.springframework.web.filter.HiddenHttpMethodFilter;
 import java.util.Arrays;
 
 @SpringBootApplication
-public class CloudcafeAwsServiceChapter5Application {
+public class CloudCafeAwsServiceChapter6Application {
 
     public static void main(String[] args) {
-        SpringApplication.run(CloudcafeAwsServiceChapter5Application.class, args);
+        SpringApplication.run(CloudCafeAwsServiceChapter6Application.class, args);
     }
 
     @Bean
