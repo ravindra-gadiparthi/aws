@@ -1,0 +1,88 @@
+cloud:
+  aws:
+    credentials:
+      instance-profile: true
+      use-default-aws-credentials-chain: true
+    region:
+      auto: true
+    stack:
+      auto: false
+management:
+  metrics:
+    export:
+      cloudwatch:
+        enabled: true
+
+app.url: https://photosite.cloudcafe.info
+cognito.rooturl: https://cloudcafe.auth.ap-south-1.amazoncognito.com
+server.forward-headers-strategy: framework
+
+spring:
+  datasource:
+    url: jdbc:mysql://cloudcafe-photos-db.cw3u3wunzof3.ap-south-1.rds.amazonaws.com:3306/Photos
+    username: admin
+    password: Testing1
+    jdbc-interceptors: com.amazonaws.xray.sql.mysql.TracingInterceptor
+  jpa:
+    hibernate:
+      ddl-auto: update
+  security:
+    oauth2:
+      client:
+        registration:
+          cognito:
+            provider: cognito
+            client-id: 5l2pb6ts728nbg7ko1urd7sfbi
+            client-secret: 147l75kjn4t5h6ecbr2p9c6ehqnk59dhnqcfvefge65q9bnbpilm
+            client-name: authorization_code
+            scope: email,openid
+            redirectUri: https://d965f0e345f64173ad7c7674982f86ec.vfs.cloud9.ap-south-1.amazonaws.com/login/oauth2/code/cognito
+            authorization-grant-type: authorization_code
+        provider:
+          cognito:
+            authorizationUri: https://cloudcafe.auth.ap-south-1.amazoncognito.com/oauth2/authorize
+            tokenUri: https://cloudcafe.auth.ap-south-1.amazoncognito.com/oauth2/token
+            jwkSetUri: https://cognito-idp.ap-south-1.amazonaws.com/ap-south-1_RmLlS6nQT/.well-known/jwks.json
+            user-info-uri: https://cloudcafe.auth.ap-south-1.amazoncognito.com/oauth2/userInfo
+            userNameAttribute: username
+
+logoutUrl:  "https://${cognito.rooturl}/logout?client_id=${spring.security.oauth2.client.registration.cognito.client-id}&redirect_uri=https://localhost:8080/redirect_uri&state=STATE&scope=openid+profile+aws.cognito.signin.user.admin"
+
+
+
+
+bucketName: cloudcafe-app
+
+
+
+logging:
+  level:
+    com:
+      amazonaws:
+        xray:
+          spring:
+            aop: trace
+---
+
+spring:
+  profiles: dev
+
+cloud:
+  aws:
+    credentials:
+      access-key: ${ACCESS_KEY}
+      secret-key: ${ACCESS_SECRET_KEY}
+      instance-profile: false
+    region:
+      static: ap-south-1
+    stack:
+      auto: false
+management:
+  metrics:
+    export:
+      cloudwatch:
+        enabled: false
+
+aws:
+  apiKey: ${cloud.aws.credentials.access-key}
+  secretKey: ${cloud.aws.credentials.secret-key}
