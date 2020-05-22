@@ -1,4 +1,4 @@
-package org.cloudcafe.aws.chapter6.config;
+package org.cloudcafe.aws.chapter7.config;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;

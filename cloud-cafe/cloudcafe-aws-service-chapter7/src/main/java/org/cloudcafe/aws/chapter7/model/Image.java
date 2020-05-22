@@ -1,4 +1,4 @@
-package org.cloudcafe.aws.chapter6.model;
+package org.cloudcafe.aws.chapter7.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

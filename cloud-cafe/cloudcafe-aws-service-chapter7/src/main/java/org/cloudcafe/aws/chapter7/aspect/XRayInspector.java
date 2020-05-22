@@ -1,4 +1,4 @@
-package org.cloudcafe.aws.chapter6.aspect;
+package org.cloudcafe.aws.chapter7.aspect;
 
 import com.amazonaws.xray.entities.Subsegment;
 import com.amazonaws.xray.spring.aop.AbstractXRayInterceptor;

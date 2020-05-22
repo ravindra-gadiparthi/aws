@@ -1,19 +1,14 @@
-package org.cloudcafe.aws.chapter6.services;
+package org.cloudcafe.aws.chapter7.services;
 
-import com.amazonaws.services.rekognition.AmazonRekognition;
-import com.amazonaws.services.rekognition.AmazonRekognitionClientBuilder;
-import com.amazonaws.services.rekognition.model.DetectLabelsRequest;
-import com.amazonaws.services.rekognition.model.DetectLabelsResult;
 import com.amazonaws.services.s3.AmazonS3Client;
 import com.amazonaws.services.s3.model.S3Object;
 import com.amazonaws.services.s3.model.S3ObjectInputStream;
-import com.amazonaws.util.IOUtils;
 import com.amazonaws.xray.AWSXRay;
 import com.amazonaws.xray.entities.Entity;
 import com.amazonaws.xray.spring.aop.XRayEnabled;
 import lombok.extern.slf4j.Slf4j;
-import org.cloudcafe.aws.chapter6.model.Image;
-import org.cloudcafe.aws.chapter6.repository.ImageRepository;
+import org.cloudcafe.aws.chapter7.model.Image;
+import org.cloudcafe.aws.chapter7.repository.ImageRepository;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
@@ -24,10 +19,6 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.transaction.Transactional;
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.nio.ByteBuffer;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -46,9 +37,6 @@ public class ImageService {
 
     private ImageRepository imageRepository;
 
-    AmazonRekognition rekognitionClient = AmazonRekognitionClientBuilder.defaultClient();
-
-
     @Value("${bucketName}")
     private String bucketName;
 
@@ -64,22 +52,6 @@ public class ImageService {
         List<Image> images= imageRepository.findByUsername(username);
         AWSXRay.endSegment();
         return images;
-    }
-
-    private String getImageLabels(File photo) throws IOException {
-
-        ByteBuffer imageBytes;
-        try (InputStream inputStream = new FileInputStream(photo)) {
-            imageBytes = ByteBuffer.wrap(IOUtils.toByteArray(inputStream));
-        }
-
-        DetectLabelsRequest labelsRequest = new DetectLabelsRequest();
-        com.amazonaws.services.rekognition.model.Image image = new com.amazonaws.services.rekognition.model.Image();
-        image.withBytes(imageBytes);
-        labelsRequest.setImage(image);
-        DetectLabelsResult detectLabels = rekognitionClient.detectLabels(labelsRequest);
-        return detectLabels.getLabels().subList(0, 5).toString();
-
     }
 
     public S3ObjectInputStream findOneImage(String fileName, String username) {
@@ -103,12 +75,6 @@ public class ImageService {
             Path copyLocation = Paths.get(UPLOAD_ROOT + File.separator + StringUtils.cleanPath(file.getOriginalFilename()));
             Files.copy(file.getInputStream(), copyLocation, StandardCopyOption.REPLACE_EXISTING);
             amazonS3Client.putObject(bucketName, getFileName(username, file.getOriginalFilename()), copyLocation.toFile());
-
-            String labels = getImageLabels(copyLocation.toFile());
-            imageRepository.save(Image.builder().labels(labels)
-                    .bucketName(bucketName)
-                    .username(username)
-                    .name(file.getOriginalFilename()).build());
         } catch (Exception e) {
             e.printStackTrace();
             throw new RuntimeException("Could not store file " + file.getOriginalFilename()

@@ -8,11 +8,11 @@
         <version>2.3.0.RELEASE</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
-    <groupId>org.cloudcafe.aws.chapter6</groupId>
-    <artifactId>cloudcafe-aws-service-chapter6</artifactId>
+    <groupId>cloudcafe-aws-service-chapter7</groupId>
+    <artifactId>cloudcafe-aws-service-chapter7</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>cloudcafe-aws-service-chapter6</name>
-    <description>Spring Cloud with S3,RDS, Recognition,XRAY and Cognito</description>
+    <description>Spring Cloud with S3,RDS</description>
 
     <properties>
         <java.version>1.8</java.version>

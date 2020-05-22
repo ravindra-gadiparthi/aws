@@ -1,7 +1,7 @@
-package org.cloudcafe.aws.chapter6.repository;
+package org.cloudcafe.aws.chapter7.repository;
 
 import com.amazonaws.xray.spring.aop.XRayEnabled;
-import org.cloudcafe.aws.chapter6.model.Image;
+import org.cloudcafe.aws.chapter7.model.Image;
 import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.stereotype.Repository;
 
