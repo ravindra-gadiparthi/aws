@@ -1,0 +1,41 @@
+cloud:
+  aws:
+    credentials:
+      instance-profile: true
+      use-default-aws-credentials-chain: true
+    region:
+      auto: true
+    stack:
+      auto: false
+management:
+  metrics:
+    export:
+      cloudwatch:
+        enabled: true
+
+bucketName: ${BUCKET_NAME}
+
+---
+
+spring:
+  profiles: dev
+
+cloud:
+  aws:
+    credentials:
+      access-key: ${ACCESS_KEY}
+      secret-key: ${ACCESS_SECRET_KEY}
+      instance-profile: false
+    region:
+      static: ap-south-1
+    stack:
+      auto: false
+management:
+  metrics:
+    export:
+      cloudwatch:
+        enabled: false
+
+aws:
+  apiKey: ${cloud.aws.credentials.access-key}
+  secretKey: ${cloud.aws.credentials.secret-key}

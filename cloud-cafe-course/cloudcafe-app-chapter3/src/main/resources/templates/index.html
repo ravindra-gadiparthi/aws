@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Cloud Cafe Learning</title>
+    <link rel="stylesheet" href="/style.css"/>
+</head>
+<body>
+
+<h1>Learning AWS & Spring Boot</h1>
+
+<h4 th:text="${extra}"></h4>
+
+<div>
+    <table>
+        <thead>
+        <tr>
+            <th>Id</th>
+            <th>Name</th>
+            <th>Image</th>
+            <th>CreatedBy</th>
+            <th>Details</th>
+            <td>Delete</td>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="image : ${images}">
+            <td th:text="${image.id}"/>
+            <td th:text="${image.name}"/>
+
+            <td><a th:href="@{'/images/' + ${image.name} + '/raw'}"><img th:src="@{'/images/' + ${image.name} + '/raw'}"
+                                                                         class="thumbnail"/></a></td>
+            <td th:text="${image.labels}"/>
+            <td th:text="${image.username}"/>
+            </td>
+            <td>
+                <form th:method="delete" th:action="@{'/images/' + ${image.name}}">
+                    <csrf disabled="true"/>
+                    <input type="submit" value="Delete"/>
+                </form>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+
+    <form method="post" enctype="multipart/form-data" action="/images">
+        <p><input type="file" name="file"/></p>
+        <p><input type="submit" value="Upload"/></p>
+    </form>
+</div>
+
+</body>
+</html>
