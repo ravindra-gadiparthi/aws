@@ -20,6 +20,8 @@ management:
 
 bucketName: cloudcafe-app
 
+server:
+  port: 5000
 ---
 
 spring:
