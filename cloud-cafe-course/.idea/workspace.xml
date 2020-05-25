@@ -351,8 +351,6 @@
       <option name="ACTIVE_PROFILES" value="dev" />
       <option name="ALTERNATIVE_JRE_PATH" />
       <envs>
-        <env name="ACCESS_KEY" value="AKIAX6PELHF2IA26QRV3" />
-        <env name="ACCESS_SECRET_KEY" value="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" />
         <env name="BUCKET_NAME" value="cloudcafe-app" />
         <env name="RDS_USERNAME" value="admin" />
         <env name="RDS_PASSWORD" value="Testing1" />
